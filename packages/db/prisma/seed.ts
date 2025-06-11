@@ -51,7 +51,31 @@ async function main() {
       },
     },
   })
-  console.log({ alice, bob })
+  const mayur = await prisma.user.upsert({
+    where: { number: '9106706932' },
+    update: {},
+    create: {
+      number: '9106706932',
+      password: await bcrypt.hash('mayur', 10),
+      name: 'mayur',
+      Balance: {
+        create: {
+            amount: 2000000,
+            locked: 0
+        }
+      },
+      OnRampTransaction: {
+        create: {
+          startTime: new Date(),
+          status: "Failure",
+          amount: 2000000,
+          token: "token__3",
+          provider: "HDFC Bank",
+        },
+      },
+    },
+  })
+  console.log({ alice, bob,mayur })
 }
 main()
   .then(async () => {

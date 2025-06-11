@@ -9,7 +9,7 @@ export async function createOnRamptxn(amount:number,provider:string){
     const userId = session?.user.id;
     if(!userId){
         return {
-            message :" User is not loged in"
+            message :"User is not loged in"
         }
     }
   await prisma.onRampTransaction.create({
